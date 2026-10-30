@@ -1,0 +1,337 @@
+/* design b, the tapestry: a dark room, the artwork as architecture, parchment type, antique gold */
+/* in the components layer so tailwind utilities on the same element still win */
+@layer components {
+.cb {
+  --ground: #1c1410;
+  --surface: #261c16;
+  --ink: #ede3d1;
+  --muted: #b9a78d;
+  --accent: #c9a96f;
+  --accent-ink: #1c1410;
+  --line: rgba(201, 169, 111, 0.3);
+  --field: #ede3d1;
+  --field-ink: #241a14;
+  --field-muted: #5d4a3b;
+  --opal: #cfe0dc;
+  --f-display: 'Bodoni Moda Variable', 'Didot', 'Bodoni 72', Georgia, serif;
+  --f-text: 'Manrope Variable', 'Avenir Next', 'Helvetica Neue', Arial, sans-serif;
+  --f-type: 'Special Elite', 'Courier New', Courier, monospace;
+  --ease: cubic-bezier(0.25, 0.46, 0.2, 1);
+
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--f-text);
+  font-size: 1rem;
+  line-height: 1.65;
+  min-height: 100vh;
+  color-scheme: dark;
+}
+.cb ::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.cb :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 4px;
+}
+.cb .skip-link {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.cb .display {
+  font-family: var(--f-display);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+/* the small-caps sans: tracked, small, used for numerals and quiet labels only */
+.cb .caps {
+  font-family: var(--f-text);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.cb .typed {
+  font-family: var(--f-type);
+  line-height: 1.8;
+}
+
+.cb .link {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 2px;
+  transition: background-size 600ms var(--ease);
+}
+.cb .link:hover,
+.cb .link:focus-visible {
+  background-size: 100% 1px;
+}
+.cb .link-on {
+  background-size: 100% 1px;
+  background-image: linear-gradient(var(--line), var(--line));
+}
+.cb .link-on:hover {
+  background-image: linear-gradient(currentColor, currentColor);
+}
+
+.cb .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 0 2rem;
+  border: 1px solid var(--accent);
+  color: var(--ink);
+  background: transparent;
+  font: 600 0.78rem/1 var(--f-text);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: background-color 500ms var(--ease), color 500ms var(--ease);
+}
+.cb .btn:hover:not(:disabled) {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.cb .btn-solid {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.cb .btn-solid:hover:not(:disabled) {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+.cb .btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* the opening: four stacked layers, a slow reveal, then gentle separation on scroll */
+.cb .stage {
+  position: relative;
+  overflow: hidden;
+  background: #2a1d15;
+}
+.cb .stage-layer {
+  position: absolute;
+  inset: -4% 0;
+  will-change: transform;
+}
+.cb .stage-layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cb .stage.is-revealing .stage-layer {
+  animation: cb-reveal 1100ms var(--ease) both;
+}
+.cb .stage.is-revealing .stage-layer:nth-child(1) {
+  animation-name: cb-ground;
+  animation-duration: 900ms;
+}
+.cb .stage.is-revealing .stage-layer:nth-child(2) {
+  animation-delay: 150ms;
+}
+.cb .stage.is-revealing .stage-layer:nth-child(3) {
+  animation-delay: 380ms;
+}
+.cb .stage.is-revealing .stage-layer:nth-child(4) {
+  animation-delay: 560ms;
+}
+@keyframes cb-ground {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes cb-reveal {
+  from {
+    opacity: 0;
+  }
+}
+.cb .scrim-b {
+  background: linear-gradient(to top, rgba(28, 20, 16, 0.96) 0%, rgba(28, 20, 16, 0.82) 38%, rgba(28, 20, 16, 0) 78%);
+}
+.cb .fade-in {
+  animation: cb-up 900ms var(--ease) both;
+}
+@keyframes cb-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+/* doorways: a still of the tapestry behind, swapped by crossfade */
+.cb .door-still {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background-repeat: no-repeat;
+  transition: opacity 700ms var(--ease), transform 1400ms var(--ease);
+  transform: scale(1.03);
+}
+.cb .door-still.is-on {
+  opacity: 0.55;
+  transform: scale(1);
+}
+.cb .door-link {
+  transition: color 500ms var(--ease), letter-spacing 700ms var(--ease);
+}
+.cb .door-link:hover,
+.cb .door-link:focus-visible {
+  color: var(--accent);
+}
+
+/* a crop of the tapestry used as a band between chapters */
+.cb .band {
+  background-color: #2a1d15;
+  background-repeat: no-repeat;
+}
+
+/* the lit page: journal articles and long reading are set light, inside the dark house */
+.cb .lit {
+  background: var(--field);
+  color: var(--field-ink);
+  color-scheme: light;
+}
+.cb .lit :where(a, button, input, summary):focus-visible {
+  outline-color: var(--field-ink);
+}
+.cb .prose {
+  font-family: var(--f-text);
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+.cb .prose > * + * {
+  margin-top: 1.2em;
+}
+.cb .prose h2 {
+  font-family: var(--f-display);
+  font-size: 2rem;
+  line-height: 1.15;
+  margin-top: 2em;
+}
+.cb .prose blockquote {
+  margin: 2.5em 0;
+  text-align: center;
+  font-family: var(--f-display);
+  font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+  line-height: 1.2;
+}
+.cb .prose blockquote::before {
+  content: '';
+  display: block;
+  width: 3rem;
+  height: 1px;
+  margin: 0 auto 1.4rem;
+  background: #9a7b45;
+}
+.cb .prose figure {
+  margin: 3em -2rem;
+}
+.cb .prose figcaption {
+  margin-top: 0.75rem;
+  padding: 0 2rem;
+  font-size: 0.85rem;
+  color: var(--field-muted);
+}
+.cb .prose .placeholder-note {
+  font-family: var(--f-type);
+  color: #7a5b2a;
+  font-size: 0.95rem;
+}
+.cb .prose .letter {
+  margin: 3em 0;
+  padding: 2.2rem 2rem;
+  background: #fbf6ec;
+  border-top: 1px solid #c8b38e;
+  border-bottom: 1px solid #c8b38e;
+  font-family: var(--f-type);
+  font-size: 1.05rem;
+  line-height: 1.85;
+}
+.cb .prose .letter > * + * {
+  margin-top: 1em;
+}
+.cb .prose .letter .letter-mark {
+  font-family: var(--f-text);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #7a5b2a;
+}
+.cb .prose a {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.cb .page-body > * + * {
+  margin-top: 1em;
+}
+
+.cb summary {
+  list-style: none;
+  cursor: pointer;
+}
+.cb summary::-webkit-details-marker {
+  display: none;
+}
+.cb details .marker {
+  transition: transform 500ms var(--ease);
+}
+.cb details[open] .marker {
+  transform: rotate(90deg);
+}
+
+.cb .field {
+  width: 100%;
+  min-height: 50px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  color: inherit;
+  font: inherit;
+  padding: 0.5rem 0;
+  transition: border-color 400ms var(--ease);
+}
+.cb .field:focus-visible {
+  outline: none;
+  border-bottom-color: var(--accent);
+}
+.cb .field::placeholder {
+  color: var(--muted);
+}
+.cb .lit .field {
+  border-bottom-color: #a08a6c;
+}
+.cb .lit .field::placeholder {
+  color: var(--field-muted);
+}
+.cb .lit .field:focus-visible {
+  border-bottom-color: var(--field-ink);
+}
+
+.cb .overlay {
+  transition: opacity 600ms var(--ease), visibility 600ms;
+}
+.cb .drawer-panel {
+  transition: transform 700ms var(--ease);
+}
+
+.cb .pulse {
+  animation: cb-pulse 1.6s var(--ease) infinite alternate;
+}
+@keyframes cb-pulse {
+  from {
+    opacity: 0.25;
+  }
+  to {
+    opacity: 0.8;
+  }
+}
+}

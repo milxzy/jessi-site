@@ -1,0 +1,275 @@
+/* design c, the archive: sand ground, chocolate ink, one tan field, plates and captions */
+/* in the components layer so tailwind utilities on the same element still win */
+@layer components {
+  .cc {
+    --ground: #e5d9c4;
+    --surface: #ede4d4;
+    --ink: #33221a;
+    --muted: #654d3c;
+    --accent: #6c4f22;
+    --accent-ink: #f3ebdd;
+    --line: rgba(51, 34, 26, 0.3);
+    --field: #c9ad85;
+    --field-ink: #2b1c15;
+    --opal: #d4dfdb;
+    --f-display: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+    --f-text: 'Schibsted Grotesk Variable', 'Helvetica Neue', Arial, sans-serif;
+    --f-type: 'IBM Plex Mono', 'Courier New', monospace;
+    --ease: cubic-bezier(0.3, 0.5, 0.15, 1);
+
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--f-text);
+    font-size: 1rem;
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+  .cc ::selection {
+    background: var(--ink);
+    color: var(--ground);
+  }
+  .cc :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+  }
+  .cc .skip-link {
+    background: var(--ink);
+    color: var(--ground);
+  }
+
+  .cc .display {
+    font-family: var(--f-display);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 0.88;
+  }
+  .cc .caption {
+    font-family: var(--f-text);
+    font-size: 0.82rem;
+    line-height: 1.45;
+    letter-spacing: 0.01em;
+  }
+  .cc .typed {
+    font-family: var(--f-type);
+    font-size: 0.92rem;
+    line-height: 1.75;
+  }
+  .cc .rule {
+    border-top: 1px solid var(--ink);
+  }
+  .cc .rule-soft {
+    border-top: 1px solid var(--line);
+  }
+
+  .cc .link {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+  .cc .link:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .cc .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    min-height: 48px;
+    padding: 0 1.1rem;
+    background: var(--ink);
+    color: var(--ground);
+    font: 500 0.95rem/1 var(--f-text);
+    transition: background-color 300ms var(--ease);
+  }
+  .cc .btn:hover:not(:disabled) {
+    background: var(--accent);
+  }
+  .cc .btn:disabled {
+    background: transparent;
+    color: var(--muted);
+    box-shadow: inset 0 0 0 1px var(--line);
+    cursor: not-allowed;
+  }
+  .cc .btn-line {
+    background: transparent;
+    color: var(--ink);
+    box-shadow: inset 0 0 0 1px var(--ink);
+  }
+  .cc .btn-line:hover:not(:disabled) {
+    background: var(--ink);
+    color: var(--ground);
+  }
+
+  /* a plate: the picture, then its caption block set in the text face */
+  .cc .plate {
+    background: var(--surface);
+  }
+
+  /* the index: very large rows, a picture that follows the pointer */
+  .cc .index-row {
+    transition: color 400ms var(--ease), padding-left 600ms var(--ease);
+  }
+  .cc .index-row:hover,
+  .cc .index-row:focus-visible,
+  .cc .index-row[aria-expanded='true'] {
+    padding-left: 0.4em;
+  }
+  .cc .follower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 400ms var(--ease);
+  }
+  .cc .follower.is-on {
+    opacity: 1;
+  }
+  .cc .expand {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 500ms var(--ease);
+  }
+  .cc .expand.is-open {
+    grid-template-rows: 1fr;
+  }
+  .cc .expand > div {
+    overflow: hidden;
+  }
+
+  .cc .plate-in {
+    animation: cc-in 700ms var(--ease) both;
+  }
+  @keyframes cc-in {
+    from {
+      opacity: 0;
+      clip-path: inset(0 0 100% 0);
+    }
+    to {
+      opacity: 1;
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  .cc .marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 999px;
+    background: var(--ground);
+    color: var(--ink);
+    font: 600 0.8rem/1 var(--f-text);
+    box-shadow: 0 0 0 1px var(--ink);
+    transition: background-color 300ms var(--ease), color 300ms var(--ease);
+  }
+  .cc .marker[aria-pressed='true'],
+  .cc .marker:hover {
+    background: var(--ink);
+    color: var(--ground);
+  }
+
+  .cc .prose {
+    font-size: 1.12rem;
+    line-height: 1.75;
+  }
+  .cc .prose > * + * {
+    margin-top: 1.1em;
+  }
+  .cc .prose h2 {
+    font-family: var(--f-display);
+    font-size: 2.4rem;
+    line-height: 1;
+    margin-top: 1.6em;
+  }
+  .cc .prose blockquote {
+    margin: 2em 0;
+    font-family: var(--f-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.02;
+    font-style: italic;
+  }
+  .cc .prose figure {
+    margin: 2.5em 0;
+  }
+  .cc .prose figcaption {
+    margin-top: 0.6rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+    padding-top: 0.5rem;
+  }
+  .cc .prose .placeholder-note {
+    font-family: var(--f-type);
+    font-size: 0.85rem;
+    color: var(--accent);
+  }
+  .cc .prose .letter {
+    margin: 2.5em 0;
+    padding: 1.6rem 1.5rem;
+    background: var(--surface);
+    border-top: 1px solid var(--ink);
+    font-family: var(--f-type);
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+  .cc .prose .letter > * + * {
+    margin-top: 1em;
+  }
+  .cc .prose .letter .letter-mark {
+    font-family: var(--f-text);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .cc .prose a {
+    text-decoration: underline;
+  }
+
+  .cc .page-body > * + * {
+    margin-top: 1em;
+  }
+
+  .cc summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  .cc summary::-webkit-details-marker {
+    display: none;
+  }
+  .cc details .sign::after {
+    content: '+';
+  }
+  .cc details[open] .sign::after {
+    content: '−';
+  }
+
+  .cc .field {
+    width: 100%;
+    min-height: 48px;
+    background: var(--surface);
+    border: 0;
+    box-shadow: inset 0 -1px 0 var(--ink);
+    color: var(--ink);
+    font: inherit;
+    padding: 0.6rem 0.75rem;
+  }
+  .cc .field::placeholder {
+    color: var(--muted);
+  }
+  .cc .field:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 0;
+  }
+
+  .cc .panel {
+    transition: transform 500ms var(--ease);
+  }
+  .cc .scrim {
+    background: rgba(51, 34, 26, 0.3);
+    transition: opacity 500ms var(--ease);
+  }
+}

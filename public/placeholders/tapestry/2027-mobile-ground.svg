@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1500" width="900" height="1500" role="img" aria-label="Placeholder for the 2027 House Tapestry, ground layer">
+<defs><pattern id="w2027" width="8.3" height="8.3" patternUnits="userSpaceOnUse">
+<path d="M0 4.2H8.3" stroke="#3a2a1f" stroke-width="0.7"/>
+<path d="M4.2 0V8.3" stroke="#3a2a1f" stroke-width="0.35"/></pattern></defs>
+<rect width="900" height="1500" fill="#2a1d15"/>
+<rect width="900" height="1500" fill="url(#w2027)" opacity="0.55"/>
+<rect x="23.4" y="23.4" width="853.2" height="1453.2" fill="none" stroke="#c2a067" stroke-width="1" opacity="0.55"/>
+<rect x="30.6" y="30.6" width="838.8" height="1438.8" fill="none" stroke="#c2a067" stroke-width="0.5" opacity="0.4"/></svg>

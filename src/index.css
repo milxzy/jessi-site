@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+/* every color and face is a token. each concept sets the values on its own root class,
+   so bg-ground in design a and design b are different browns without any shared hex. */
+@theme {
+  --color-*: initial;
+  --font-*: initial;
+}
+@theme inline {
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-line: var(--line);
+  --color-field: var(--field);
+  --color-field-ink: var(--field-ink);
+  --color-opal: var(--opal);
+  /* design d only: its second block colour */
+  --color-camel: var(--camel);
+  --color-camel-ink: var(--camel-ink);
+  --font-display: var(--f-display);
+  --font-text: var(--f-text);
+  --font-type: var(--f-type);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    /* sticky headers never cover a focused or linked element */
+    scroll-padding-top: 5.5rem;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    margin: 0;
+  }
+  img,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+  img {
+    height: auto;
+  }
+  button {
+    cursor: pointer;
+  }
+  :where(a, button, label, summary, input, select, textarea) {
+    touch-action: manipulation;
+  }
+  :where(a, button, input, select, textarea, summary):focus {
+    outline: none;
+  }
+}
+
+/* skip link: shared mechanics, each concept styles its look through tokens */
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  transform: translateY(-200%);
+  padding: 0.75rem 1rem;
+  background: var(--ink);
+  color: var(--ground);
+  font: 500 0.95rem/1 var(--f-text);
+  text-decoration: none;
+}
+.skip-link:focus-visible {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}

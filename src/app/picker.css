@@ -1,0 +1,112 @@
+.picker {
+  --p-ground: #eee7dc;
+  --p-ink: #2b211b;
+  --p-muted: #65544a;
+  --p-step: #e5dccd;
+  min-height: 100vh;
+  background: var(--p-ground);
+  color: var(--p-ink);
+  font-family: 'Fraunces Variable', Georgia, serif;
+  font-optical-sizing: auto;
+  padding: clamp(28px, 6vw, 88px) clamp(18px, 5vw, 72px) 96px;
+}
+.picker-head {
+  max-width: 44rem;
+}
+.picker-house {
+  margin: 0 0 1.25rem;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+.picker h1 {
+  margin: 0;
+  font-weight: 330;
+  font-size: clamp(2.1rem, 5.2vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  font-variation-settings: 'SOFT' 50;
+}
+.picker-intro {
+  margin: 1.5rem 0 0;
+  font-size: 1.08rem;
+  line-height: 1.6;
+  max-width: 36rem;
+}
+.picker-list {
+  list-style: none;
+  margin: clamp(48px, 8vw, 96px) 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.picker-row {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr minmax(0, 22rem);
+  align-items: center;
+  gap: clamp(16px, 3vw, 40px);
+  padding: 18px;
+  color: inherit;
+  text-decoration: none;
+  background: var(--p-step);
+  transition: background-color 400ms ease;
+}
+.picker-row:hover {
+  background: #ddd2c0;
+}
+.picker-row:focus-visible {
+  outline: 2px solid var(--p-ink);
+  outline-offset: 3px;
+}
+.picker-letter {
+  font-size: 4rem;
+  line-height: 1;
+  font-weight: 300;
+  text-align: center;
+}
+.picker-text {
+  display: grid;
+  gap: 0.4rem;
+}
+.picker-name {
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.picker-idea {
+  color: var(--p-muted);
+  font-size: 1.02rem;
+  line-height: 1.5;
+  max-width: 34rem;
+}
+.picker-thumb {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #d9cdb9;
+}
+.picker-thumb iframe {
+  position: absolute;
+  inset: 0 auto auto 0;
+  border: 0;
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+.picker-foot {
+  margin-top: 56px;
+  max-width: 40rem;
+  color: var(--p-muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+@media (max-width: 760px) {
+  .picker-row {
+    grid-template-columns: 2.5rem 1fr;
+  }
+  .picker-letter {
+    font-size: 2.6rem;
+  }
+  .picker-thumb {
+    grid-column: 1 / -1;
+    order: -1;
+  }
+}

@@ -1,0 +1,52 @@
+/* fixed values on purpose: this bar belongs to the presentation, not to any concept */
+.jf-switcher {
+  position: fixed;
+  left: max(10px, env(safe-area-inset-left));
+  bottom: max(10px, env(safe-area-inset-bottom));
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  background: rgba(43, 33, 27, 0.9);
+  color: #efe7da;
+  font: 500 12px/1 ui-sans-serif, -apple-system, 'Segoe UI', sans-serif;
+  border-radius: 3px;
+}
+.jf-switcher a {
+  color: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  border-radius: 2px;
+}
+.jf-switcher__back {
+  padding: 0 9px;
+}
+.jf-switcher__link {
+  width: 28px;
+}
+.jf-switcher a:hover {
+  background: rgba(239, 231, 218, 0.14);
+}
+.jf-switcher a[aria-current='page'] {
+  background: #efe7da;
+  color: #2b211b;
+}
+.jf-switcher a:focus-visible {
+  outline: 2px solid #efe7da;
+  outline-offset: 1px;
+}
+.jf-switcher__sep {
+  width: 1px;
+  height: 16px;
+  margin: 0 3px;
+  background: rgba(239, 231, 218, 0.3);
+}
+@media print {
+  .jf-switcher {
+    display: none;
+  }
+}

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" width="1200" height="1500" role="img" aria-label="Placeholder drawing of The First Huggie, a fitted gold huggie earring"><defs>
+<linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#e9cf95"/><stop offset=".45" stop-color="#b88f4e"/><stop offset=".7" stop-color="#d9b877"/><stop offset="1" stop-color="#8d6a35"/></linearGradient>
+<linearGradient id="g2" x1="1" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#f1dcaa"/><stop offset=".5" stop-color="#c49c5a"/><stop offset="1" stop-color="#7f5f2e"/></linearGradient>
+<radialGradient id="opal" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#f4f1ea"/><stop offset=".55" stop-color="#d6e4e0"/><stop offset=".8" stop-color="#e8d9dc"/><stop offset="1" stop-color="#c9d8d2"/></radialGradient>
+</defs><rect width="1200" height="1500" fill="#ece3d3"/><ellipse cx="600" cy="1290" rx="300" ry="26" fill="#e2d6c2"/><g>
+<ellipse cx="470" cy="640" rx="210" ry="220.5" fill="none" stroke="url(#g)" stroke-width="63"/>
+<ellipse cx="480.5" cy="640" rx="180.6" ry="189" fill="none" stroke="#7a5a2b" stroke-width="2" opacity=".35"/>
+<path d="M264.20000000000005 587.5a210 220.5 0 0 1 126 -147" fill="none" stroke="#fff6df" stroke-width="10.5" stroke-linecap="round" opacity=".7"/>
+<path d="M428 388v63" stroke="#7a5a2b" stroke-width="2" opacity=".5"/>
+<circle cx="470" cy="892" r="18.9" fill="none" stroke="url(#g2)" stroke-width="9.45"/>
+</g><g>
+<ellipse cx="780" cy="760" rx="150" ry="157.5" fill="none" stroke="url(#g)" stroke-width="45"/>
+<ellipse cx="787.5" cy="760" rx="129" ry="135" fill="none" stroke="#7a5a2b" stroke-width="2" opacity=".35"/>
+<path d="M633 722.5a150 157.5 0 0 1 90 -105" fill="none" stroke="#fff6df" stroke-width="7.5" stroke-linecap="round" opacity=".7"/>
+<path d="M750 580v45" stroke="#7a5a2b" stroke-width="2" opacity=".5"/>
+<circle cx="780" cy="940" r="13.5" fill="none" stroke="url(#g2)" stroke-width="6.75"/>
+</g><text x="1140" y="1450" text-anchor="end" font-family="Georgia, serif" font-size="22" fill="#8a7458">Placeholder drawing</text></svg>
