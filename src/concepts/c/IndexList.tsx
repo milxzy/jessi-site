@@ -33,11 +33,32 @@ export function IndexList({ items, size = 'xl', label }: { items: IndexItem[]; s
     return () => mq.removeEventListener('change', on)
   }, [])
 
-  const place = (x: number, y: number) => {
-    pos.current = { x, y }
+  const target = useRef({ x: 0, y: 0 })
+  const raf = useRef(0)
+
+  // the plate eases toward the pointer instead of snapping to it, and stays inside the window
+  const draw = () => {
     const el = follower.current
-    if (el) el.style.transform = `translate3d(${x + 24}px, ${y - el.offsetHeight / 2}px, 0)`
+    if (!el) return
+    const { x, y } = target.current
+    const w = el.offsetWidth
+    const h = el.offsetHeight
+    const goalX = Math.min(x + 32, window.innerWidth - w - 16)
+    const goalY = Math.max(16, Math.min(y - h / 2, window.innerHeight - h - 16))
+    const p = pos.current
+    const k = reduced ? 1 : 0.16
+    p.x += (goalX - p.x) * k
+    p.y += (goalY - p.y) * k
+    el.style.transform = `translate3d(${p.x}px, ${p.y}px, 0)`
+    if (Math.abs(goalX - p.x) > 0.5 || Math.abs(goalY - p.y) > 0.5) raf.current = requestAnimationFrame(draw)
   }
+  const place = (x: number, y: number, snap = false) => {
+    target.current = { x, y }
+    if (snap) pos.current = { x: x + 32, y: y - (follower.current?.offsetHeight ?? 0) / 2 }
+    cancelAnimationFrame(raf.current)
+    raf.current = requestAnimationFrame(draw)
+  }
+  useEffect(() => () => cancelAnimationFrame(raf.current), [])
 
   const type = size === 'xl' ? 'text-[clamp(2.8rem,9.6vw,9rem)]' : 'text-[clamp(2rem,5.4vw,4.4rem)]'
   const active = hover !== null ? items[hover] : null
@@ -82,13 +103,13 @@ export function IndexList({ items, size = 'xl', label }: { items: IndexItem[]; s
               className="index-row group grid grid-cols-[3rem_1fr] items-baseline gap-x-2 py-2 md:grid-cols-[6rem_1fr_16rem]"
               onMouseEnter={(e) => {
                 setHover(i)
-                place(e.clientX, e.clientY)
+                place(e.clientX, e.clientY, active === null)
               }}
               onMouseMove={(e) => !reduced && place(e.clientX, e.clientY)}
               onFocus={(e) => {
                 setHover(i)
                 const r = e.currentTarget.getBoundingClientRect()
-                place(Math.min(r.right - 360, window.innerWidth - 380), r.top + r.height / 2)
+                place(Math.min(r.right - 360, window.innerWidth - 380), r.top + r.height / 2, true)
               }}
               onBlur={() => setHover(null)}
             >
@@ -102,14 +123,20 @@ export function IndexList({ items, size = 'xl', label }: { items: IndexItem[]; s
           </li>
         ))}
       </ul>
-      <div ref={follower} aria-hidden="true" className={`follower w-[min(22rem,30vw)] ${active ? 'is-on' : ''}`}>
-        {items.map((it, i) =>
-          it.img ? (
-            <Picture key={it.key} img={it.img} sizes="22rem" alt="" className={`aspect-[4/5] w-full object-cover ${hover === i ? 'block' : 'hidden'}`} />
-          ) : (
-            <div key={it.key} className={`aspect-[4/5] w-full ${hover === i ? 'block' : 'hidden'}`} style={it.imgStyle} />
-          ),
-        )}
+      <div ref={follower} aria-hidden="true" className={`follower w-[min(18rem,26vw)] ${active ? 'is-on' : ''}`}>
+        <div className="plate p-2 pb-0">
+          {items.map((it, i) =>
+            it.img ? (
+              <Picture key={it.key} img={it.img} sizes="18rem" alt="" className={`aspect-[4/5] w-full object-cover ${hover === i ? 'block' : 'hidden'}`} />
+            ) : (
+              <div key={it.key} className={`aspect-[4/5] w-full ${hover === i ? 'block' : 'hidden'}`} style={it.imgStyle} />
+            ),
+          )}
+          <p className="caption flex justify-between gap-3 py-2 text-muted">
+            <span>Plate {active?.n}</span>
+            <span className="truncate">{active?.title}</span>
+          </p>
+        </div>
       </div>
     </div>
   )

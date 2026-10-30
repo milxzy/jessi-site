@@ -127,6 +127,12 @@
   .cc .follower.is-on {
     opacity: 1;
   }
+  .cc .follower img {
+    filter: sepia(0.18) saturate(0.85);
+  }
+  .cc .follower .plate {
+    box-shadow: 0 0 0 1px var(--ink);
+  }
   .cc .expand {
     display: grid;
     grid-template-rows: 0fr;

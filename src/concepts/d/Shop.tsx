@@ -112,12 +112,12 @@ export function Heirlooms() {
       {r.status === 'ready' && !r.data.length && <p className="mt-12 text-center text-muted">The heirlooms will be shown here soon.</p>}
       <ul className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-4">
         {r.data?.map((p) => (
-          <li key={p.id} className={p.productType === 'Huggie' ? 'col-span-2 md:row-span-2' : ''}>
+          <li key={p.id}>
             <Link to={p.productType === 'Huggie' ? to('heirlooms/the-first-huggie') : to(`heirlooms/chapters#${p.handle}`)} className="group block text-center">
               <span className="arch block">
                 <Picture img={p.images[0]!} sizes="(min-width: 768px) 25vw, 46vw" className="aspect-[3/4] w-full object-cover transition-transform duration-1000 group-hover:scale-[1.03]" />
               </span>
-              <span className={`display mt-3 block ${p.productType === 'Huggie' ? 'text-[2rem]' : 'text-[1.3rem]'}`}>{p.title}</span>
+              <span className="display mt-3 block text-[1.3rem]">{p.title}</span>
               <span className="mt-1 flex flex-wrap items-center justify-center gap-2 text-[0.95rem]">
                 <Price money={p.priceFrom} from={p.variants.length > 1} />
                 <Stock state={p.availability} />
