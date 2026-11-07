@@ -184,12 +184,6 @@ export default function Landing() {
               <span className="ce-sign__name">Jessica</span>
             </p>
           </div>
-          <div className="ce-reply ce-reveal">
-            <p className="ce-reply__line">
-              <span>For the woman you are.</span> <span>And the woman you’re becoming.</span>
-            </p>
-            <Join id="ce-email-reply" w={w} from={from} onSend={setFrom} />
-          </div>
         </section>
 
         <div className="ce-photo" aria-hidden="true">

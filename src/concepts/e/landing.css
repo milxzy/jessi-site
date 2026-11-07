@@ -225,30 +225,6 @@
   letter-spacing: -0.01em;
   color: var(--oxblood);
 }
-.ce-reply {
-  max-width: var(--measure);
-  margin-top: 12px;
-  padding: clamp(28px, 4vw, 40px);
-  background: var(--tan);
-}
-.ce-reply__line {
-  margin: 0 0 24px;
-  font-family: var(--f-display);
-  font-size: clamp(1.75rem, 2.6vw, 2.25rem);
-  line-height: 1.1;
-}
-.ce-reply__line span {
-  display: block;
-}
-.ce-reply .ce-field {
-  background: var(--blush);
-}
-.ce-reply .ce-field:hover {
-  background: var(--paper);
-}
-.ce-reply .ce-thanks {
-  background: var(--blush);
-}
 
 /* the photograph: one still frame of the house, three pictures that trade places as the letter is read */
 .ce-photo {
