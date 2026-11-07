@@ -2,7 +2,7 @@
 
 ## What this is
 
-This project holds four complete design concepts for the Jessi Frances website, so they can be compared side by side before one is chosen. They're labeled A to D:
+This project holds four complete design concepts for the Jessi Frances website, so they can be compared side by side before one is chosen. They're labeled A to D, and there is a separate landing page (E) for the pre-launch waitlist:
 
 - **The Letter.** Paper, typed letters, and envelopes, as if you were opening Frances's correspondence.
 - **The Tapestry.** Dark and cinematic, with the tapestry artwork leading the whole experience.
@@ -114,3 +114,17 @@ If the real store isn't ready yet, a free development store from a Shopify Partn
 - `README.md`: the technical details, including every metafield key and how the Journal maps to Shopify.
 - `OWNER_GUIDE.md`: a plain-language guide for the owner on editing things in Shopify.
 - `BRAND_NOTES.md`: what came from the client's documents, what's placeholder, and the full list of open questions.
+
+
+## The landing page and Mailchimp
+
+The landing page (the "Landing page" row on the home page, at `/landing-page`) is the waitlist for presales. It has one job: collect emails into Mailchimp.
+
+1. In Mailchimp, go to **Audience > Signup forms > Embedded forms** for the audience that should hold the waitlist.
+2. In the code shown there, find `action="https://....list-manage.com/subscribe/post?u=...&id=..."` and copy just that URL.
+3. In the hosting dashboard (Vercel, Netlify or Cloudflare), add an environment variable named `VITE_MAILCHIMP_FORM_ACTION` with that URL, then redeploy.
+4. Open `/landing-page`, sign up with a test address, and confirm it appears in the audience.
+
+Until step 3 is done, the page shows its "thank you" message but sends nothing. If the audience uses double opt-in, people get Mailchimp's confirmation email first, which is what the thank-you message tells them to expect.
+
+Still to confirm with the client: the Instagram and TikTok addresses (they currently open each platform's home page), and the licensed brand fonts, which are stood in for by free ones.

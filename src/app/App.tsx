@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { CartProvider } from '@/shared/commerce'
 import { ScrollToTop } from '@/shared/lib/scroll'
 import { ConceptPicker } from './ConceptPicker'
@@ -10,6 +10,7 @@ const A = lazy(() => import('@/concepts/a'))
 const B = lazy(() => import('@/concepts/b'))
 const C = lazy(() => import('@/concepts/c'))
 const D = lazy(() => import('@/concepts/d'))
+const E = lazy(() => import('@/concepts/e'))
 
 export function App() {
   return (
@@ -23,6 +24,8 @@ export function App() {
             <Route path="/b/*" element={<><B /><ConceptSwitcher current="b" /></>} />
             <Route path="/c/*" element={<><C /><ConceptSwitcher current="c" /></>} />
             <Route path="/d/*" element={<><D /><ConceptSwitcher current="d" /></>} />
+            <Route path="/landing-page" element={<><E /><ConceptSwitcher current="landing-page" /></>} />
+            <Route path="/e" element={<Navigate to="/landing-page" replace />} />
             <Route path="*" element={<ConceptPicker />} />
           </Routes>
         </Suspense>

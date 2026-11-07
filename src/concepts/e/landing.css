@@ -1,0 +1,470 @@
+/* design e, the landing page: blush paper beside one fixed photograph. brand colours from the JF2601 concepts. */
+/* Instrument Serif stands in for Span Compressed, Hanken Grotesk for Nitti Grotesk, Special Elite for Nitti Typewriter,
+   until the licensed faces are supplied. the wordmark itself is the client's vector. */
+.ce {
+  --blush: #e8d6cc;
+  --paper: #f3e9e1;
+  --tan: #d1b5a1;
+  --caramel: #c9916a;
+  --rust: #8c4830;
+  --ink: #40261c;
+  --night: #261713;
+  --oxblood: #5a1e1b;
+  --oxblood-hover: #46130f;
+  --f-display: 'Instrument Serif', 'Times New Roman', serif;
+  --f-text: 'Hanken Grotesk Variable', 'Avenir Next', 'Segoe UI', sans-serif;
+  --f-letter: 'Special Elite', 'Courier New', monospace;
+  --gutter: clamp(24px, 4.4vw, 64px);
+  --measure: 37rem;
+  --head-h: 132px;
+  --ease: cubic-bezier(0.22, 0.61, 0.2, 1);
+
+  background: var(--blush);
+  color: var(--ink);
+  font-family: var(--f-text);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  min-height: 100vh;
+  display: block;
+}
+.ce ::selection {
+  background: var(--caramel);
+  color: var(--night);
+}
+.ce :where(a, button, input):focus-visible {
+  outline: 3px solid var(--oxblood);
+  outline-offset: 3px;
+}
+.ce-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px; /* taste-skill-ignore: visually hidden label, not a rule */
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* the stage: text on the left, one photograph held still on the right */
+.ce-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  grid-template-rows: var(--head-h) auto auto;
+  grid-template-areas:
+    'head photo'
+    'hero photo'
+    'letter photo';
+}
+.ce-head {
+  grid-area: head;
+  padding: 44px var(--gutter) 0;
+}
+.ce-wordmark {
+  width: min(100%, 372px);
+  height: auto;
+  color: var(--ink);
+}
+.ce-house {
+  margin: 14px 0 0;
+  font-size: 1.0625rem;
+  letter-spacing: 0.02em;
+  color: var(--rust);
+}
+
+.ce-hero {
+  grid-area: hero;
+  min-height: calc(100vh - var(--head-h)); /* taste-skill-ignore: fallback before svh */
+  min-height: calc(100svh - var(--head-h));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px var(--gutter) 64px;
+}
+.ce-title {
+  margin: 0;
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(4.25rem, 10.2vw, 9.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+.ce-title span,
+.ce-sub span {
+  display: block;
+}
+.ce-sub {
+  margin: 32px 0 0;
+  font-family: var(--f-display);
+  font-size: clamp(1.625rem, 2.5vw, 2.125rem);
+  line-height: 1.12;
+  letter-spacing: -0.005em;
+}
+.ce-join {
+  margin-top: 44px;
+  max-width: var(--measure);
+}
+
+/* the one form (used twice: the top of the page and the reply under the letter) */
+.ce-form {
+  display: grid;
+  gap: 12px;
+}
+.ce-field {
+  width: 100%;
+  min-height: 60px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 1.125rem;
+  transition: background-color 0.2s var(--ease);
+}
+.ce-field::placeholder {
+  color: #735647;
+  opacity: 1;
+}
+.ce-field:hover {
+  background: #f8f1ec;
+}
+.ce-field[aria-invalid='true'] {
+  outline: 3px solid var(--oxblood);
+  outline-offset: 0;
+}
+.ce-button {
+  width: 100%;
+  min-height: 60px;
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 0;
+  background: var(--oxblood);
+  color: var(--blush);
+  font: inherit;
+  font-size: 1.0625rem;
+  font-weight: 560;
+  letter-spacing: 0.01em;
+  line-height: 1.25;
+  transition:
+    background-color 0.2s var(--ease),
+    transform 0.12s var(--ease);
+}
+.ce-button:hover {
+  background: var(--oxblood-hover);
+}
+.ce-button:active {
+  transform: translateY(1px);
+}
+.ce-button:disabled {
+  cursor: progress;
+  background: var(--rust);
+}
+.ce-includes {
+  margin: 8px 0 0;
+  max-width: 30rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.ce-error {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 560;
+  color: var(--oxblood);
+}
+.ce-thanks {
+  padding: 28px 28px 30px;
+  background: var(--paper);
+  font-family: var(--f-letter);
+  font-size: 1.125rem;
+  line-height: 1.65;
+  animation: ce-rise 0.7s var(--ease) both;
+}
+.ce-thanks:focus {
+  outline: none;
+}
+.ce-thanks p {
+  margin: 0;
+  max-width: 34ch;
+}
+
+/* the letter: typewritten on a sheet one tone lighter than the page */
+.ce-letter {
+  grid-area: letter;
+  padding: clamp(96px, 12vw, 176px) var(--gutter) clamp(96px, 12vw, 176px);
+}
+.ce-letter__title {
+  margin: 0 0 40px;
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+.ce-sheet {
+  max-width: var(--measure);
+  padding: clamp(28px, 4vw, 56px);
+  background: var(--paper);
+  font-family: var(--f-letter);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+.ce-sheet p {
+  margin: 0 0 1.35em;
+}
+.ce-sign {
+  margin-bottom: 0 !important;
+  padding-top: 0.4em;
+}
+.ce-sign__name {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 2.75rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--oxblood);
+}
+.ce-reply {
+  max-width: var(--measure);
+  margin-top: 12px;
+  padding: clamp(28px, 4vw, 40px);
+  background: var(--tan);
+}
+.ce-reply__line {
+  margin: 0 0 24px;
+  font-family: var(--f-display);
+  font-size: clamp(1.75rem, 2.6vw, 2.25rem);
+  line-height: 1.1;
+}
+.ce-reply__line span {
+  display: block;
+}
+.ce-reply .ce-field {
+  background: var(--blush);
+}
+.ce-reply .ce-field:hover {
+  background: var(--paper);
+}
+.ce-reply .ce-thanks {
+  background: var(--blush);
+}
+
+/* the photograph: one still frame of the house, three pictures that trade places as the letter is read */
+.ce-photo {
+  grid-area: photo;
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh; /* taste-skill-ignore: fallback before svh */
+  height: 100svh;
+  overflow: hidden;
+  background: var(--night);
+}
+.ce-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.6s var(--ease);
+}
+.ce-photo img.is-on {
+  opacity: 1;
+  animation: ce-drift 18s var(--ease) both;
+}
+.ce-photo img[src$='ribbon.jpg'] {
+  object-position: 50% 40%;
+}
+
+/* the footer: the name returns at full width */
+.ce-foot {
+  padding: clamp(72px, 9vw, 128px) var(--gutter) 56px;
+  background: var(--night);
+  color: var(--blush);
+}
+.ce-foot__mark {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.ce-foot__row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: baseline;
+  gap: 24px;
+  margin-top: clamp(48px, 7vw, 96px);
+  font-size: 1.0625rem;
+}
+.ce-foot__row p,
+.ce-foot__social {
+  margin: 0;
+}
+.ce-foot__social {
+  display: flex;
+  gap: 40px;
+  padding: 0;
+  list-style: none;
+  font-family: var(--f-display);
+  font-size: 2rem;
+  line-height: 1;
+}
+.ce-foot__social a {
+  display: inline-block;
+  padding: 10px 0;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 8px;
+  transition: text-decoration-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+.ce-foot__social a:hover {
+  color: var(--caramel);
+  text-decoration-color: currentColor;
+}
+.ce-foot :where(a):focus-visible {
+  outline-color: var(--caramel);
+}
+.ce-foot__legal {
+  justify-self: end;
+}
+
+/* motion: one arrival on load, one rise as each part of the letter is reached. all of it stops under reduced motion. */
+@keyframes ce-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ce-drift {
+  from {
+    transform: scale(1.07);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ce-head,
+  .ce-title span,
+  .ce-sub span,
+  .ce-join {
+    animation: ce-rise 0.9s var(--ease) both;
+  }
+  .ce-house {
+    animation: ce-rise 0.9s var(--ease) 0.08s both;
+  }
+  .ce-title span:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .ce-title span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .ce-sub span:nth-child(1) {
+    animation-delay: 0.34s;
+  }
+  .ce-sub span:nth-child(2) {
+    animation-delay: 0.42s;
+  }
+  .ce-join {
+    animation-delay: 0.56s;
+  }
+  .ce[data-js] .ce-reveal:not(.is-in) {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  .ce-reveal {
+    transition:
+      opacity 0.8s var(--ease),
+      transform 0.8s var(--ease);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ce-photo img {
+    transition: none;
+  }
+  .ce-photo img.is-on,
+  .ce-thanks {
+    animation: none;
+  }
+}
+
+/* phone and small tablet: the photograph leads, then the sheet slides up over it */
+@media (max-width: 900px) {
+  .ce {
+    --head-h: 112px;
+    --photo-h: min(36svh, 340px);
+  }
+  .ce-stage {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: var(--head-h) var(--photo-h) auto auto;
+    grid-template-areas:
+      'head'
+      'gap'
+      'hero'
+      'letter';
+  }
+  .ce-head {
+    padding-top: 28px;
+    background: var(--blush);
+  }
+  .ce-wordmark {
+    width: min(100%, 248px);
+  }
+  .ce-house {
+    margin-top: 10px;
+    font-size: 1rem;
+  }
+  .ce-photo {
+    grid-area: 2 / 1 / -1 / 2;
+    height: var(--photo-h);
+    z-index: 0;
+  }
+  .ce-hero,
+  .ce-letter {
+    position: relative;
+    z-index: 1;
+    background: var(--blush);
+  }
+  .ce-hero {
+    grid-area: hero;
+    min-height: 0;
+    justify-content: flex-start;
+    padding: 28px var(--gutter) 56px;
+  }
+  .ce-title {
+    font-size: clamp(3.75rem, 17.5vw, 6.5rem);
+  }
+  .ce-sub {
+    margin-top: 20px;
+    font-size: 1.625rem;
+  }
+  .ce-join {
+    margin-top: 28px;
+  }
+  .ce-field,
+  .ce-button {
+    min-height: 56px;
+  }
+  .ce-button {
+    font-size: 1rem;
+    padding-inline: 14px;
+  }
+  .ce-foot__row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .ce-foot__legal {
+    justify-self: start;
+  }
+  .ce-foot__social {
+    gap: 32px;
+  }
+}

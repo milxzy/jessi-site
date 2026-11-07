@@ -45,7 +45,7 @@ export function ConceptPicker() {
         <p className="picker-intro">
           Each design tells the same story in the same order, starting with the tapestry, then Frances, the heirlooms, the
           Journal, and an invitation to join. Open one, then use the bar at the bottom of the screen to compare the same page
-          across all four.
+          across all four. The landing page at the end is separate: a single pre-launch page for collecting emails.
         </p>
       </header>
       <main>
@@ -53,16 +53,14 @@ export function ConceptPicker() {
           {concepts.map((c) => (
             <li key={c.key}>
               <Link to={`/${c.key}`} className="picker-row">
-                <span className="picker-letter" aria-hidden="true">
+                <span className={c.key === 'landing-page' ? 'picker-letter picker-letter--word' : 'picker-letter'} aria-hidden="true">
                   {c.letter}
                 </span>
                 <span className="picker-text">
-                  <span className="picker-name">
-                    Design {c.letter}: {c.name}
-                  </span>
+                  <span className="picker-name">{c.key === 'landing-page' ? c.name : `Design ${c.letter}: ${c.name}`}</span>
                   <span className="picker-idea">{c.idea}</span>
                 </span>
-                <Thumb path={`/${c.key}`} label={`Preview of design ${c.letter}`} />
+                <Thumb path={`/${c.key}`} label={c.key === 'landing-page' ? 'Preview of the landing page' : `Preview of design ${c.letter}`} />
               </Link>
             </li>
           ))}

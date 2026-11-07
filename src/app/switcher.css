@@ -28,6 +28,10 @@
 .jf-switcher__link {
   width: 28px;
 }
+.jf-switcher__link--word {
+  width: auto;
+  padding: 0 9px;
+}
 .jf-switcher a:hover {
   background: rgba(239, 231, 218, 0.14);
 }

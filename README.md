@@ -9,6 +9,7 @@ One project holding four complete design concepts for the digital home of Jessi 
 | `/b/*` | Design B, The Tapestry | Dark and cinematic, full-bleed layered tapestry, numbered doorways that crossfade tapestry details |
 | `/c/*` | Design C, The Archive | Catalogue plates and captions, a giant index with a cursor-following image, the Tapestry page as the archive |
 | `/d/*` | Design D, The Parlor | Phone-first, a keyhole window, arched panels that open like an accordion, bottom sheets |
+| `/landing-page` | Landing page | The pre-launch waitlist. One page, Jessica's note beside a fixed photograph, one email field that adds people to Mailchimp |
 
 Inside any concept, the small bar at the bottom left goes back to the picker. It also switches concepts while keeping the current page, so `/a/journal` becomes `/b/journal`.
 
@@ -39,6 +40,7 @@ Copy `.env.example` to `.env.local`.
 | `VITE_SHOPIFY_STORE_DOMAIN` | e.g. `jessi-frances.myshopify.com` |
 | `VITE_SHOPIFY_STOREFRONT_TOKEN` | The **public** Storefront API token from the Headless sales channel |
 | `VITE_SHOPIFY_JOURNAL_BLOG` | Blog handle for the Journal (default `journal`) |
+| `VITE_MAILCHIMP_FORM_ACTION` | The `action` URL of the Mailchimp embedded signup form, for the landing page (see below) |
 
 With both of the first two set, the site uses Shopify. With either missing, it runs on the built-in mock store, so the design presentation always works offline.
 
@@ -185,3 +187,13 @@ Every placeholder image is listed once, in `src/shared/data/images.ts`. Photogra
 ## Option B tradeoff (from the brief)
 
 This is option B from the brief: a custom React storefront on Shopify. The owner edits products, prices, stock, images, Journal entries, and pages in the **Shopify admin**, and the site picks the changes up. What the owner can't change without a developer is layout and design, which lives in this code rather than in a Shopify theme editor. Option A (a customized Shopify theme) would give theme-editor control but less freedom in the design. Monthly costs: a Shopify plan that includes the Headless channel, plus hosting (Vercel, Netlify, and Cloudflare all have free tiers suited to a site this size).
+
+## Landing page (`/landing-page`) and Mailchimp
+
+The landing page only collects emails for the waitlist. Its code is in `src/concepts/e/`, and the signup logic is `src/shared/lib/mailchimp.ts`.
+
+To connect it: in Mailchimp, open **Audience > Signup forms > Embedded forms**, and copy the `action="..."` URL from the form code. It looks like `https://yourname.us21.list-manage.com/subscribe/post?u=XXXX&id=YYYY`. Set it as `VITE_MAILCHIMP_FORM_ACTION` in the host's dashboard, then redeploy. No API key is involved: that URL is the public endpoint Mailchimp makes for this.
+
+With the variable empty, the page still works for preview, but nothing is sent anywhere (the browser console says so). Set it before sharing the link publicly. Mailchimp sends its own confirmation email if the audience uses double opt-in, and the page's thank-you message already accounts for that.
+
+The wordmark is the client's own vector (from the JF2601 brand concepts). The three photographs in `public/landing/` are cropped from the same document. Instrument Serif, Hanken Grotesk and Special Elite stand in for Span Compressed, Nitti Grotesk and Nitti Typewriter until the licensed fonts are supplied. The Instagram and TikTok links in `src/concepts/e/index.tsx` open each platform's home page until the real handles are confirmed.
