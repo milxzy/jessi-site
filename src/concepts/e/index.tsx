@@ -3,6 +3,7 @@ import '@fontsource/instrument-serif/400.css'
 import '@fontsource/instrument-serif/400-italic.css'
 import '@fontsource-variable/hanken-grotesk'
 import '@fontsource/special-elite/400.css'
+import { Link } from 'react-router-dom'
 import { useWaitlist } from '@/shared/lib/mailchimp'
 import { useSeo } from '@/shared/lib/seo'
 import { Wordmark } from './Wordmark'
@@ -15,11 +16,24 @@ import './landing.css'
 const BUTTON = 'Receive the letters from Jessi Frances'
 const INCLUDES = 'Letters from Jessica, stories from The Frances Journal, and news from the house as we get ready to open.'
 
-// placeholder destinations: they open each platform's home until the house's own handles are confirmed
 const SOCIAL = [
-  { label: 'Instagram', href: 'https://www.instagram.com/' },
-  { label: 'TikTok', href: 'https://www.tiktok.com/' },
+  { label: 'Instagram', href: 'https://www.instagram.com/jessifrances' },
+  { label: 'TikTok', href: 'https://www.tiktok.com/@jessifrancess?_r=1&_t=ZP-9BHIM9TX1Sh' },
 ]
+
+function Social({ className }: { className: string }) {
+  return (
+    <ul className={className}>
+      {SOCIAL.map((s) => (
+        <li key={s.label}>
+          <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`Jessi Frances on ${s.label} (opens in a new tab)`}>
+            {s.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}
 
 type Waitlist = ReturnType<typeof useWaitlist>
 
@@ -76,7 +90,7 @@ function Join({ id, w, from, onSend, note }: { id: string; w: Waitlist; from: st
       )}
       {note && (
         <p id={`${id}-note`} className="ce-includes">
-          {INCLUDES}
+          {INCLUDES} <span className="ce-includes__legal">Unsubscribe any time. See our <Link to="/privacy">Privacy Policy</Link>.</span>
         </p>
       )}
     </form>
@@ -197,16 +211,18 @@ export default function Landing() {
         <Wordmark className="ce-foot__mark ce-reveal" />
         <div className="ce-foot__row ce-reveal">
           <p className="ce-foot__house">A House of Modern Heirlooms</p>
-          <ul className="ce-foot__social">
-            {SOCIAL.map((s) => (
-              <li key={s.label}>
-                <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`Jessi Frances on ${s.label} (opens in a new tab)`}>
-                  {s.label}
-                </a>
+          <Social className="ce-foot__social" />
+          <div className="ce-foot__legal">
+            <p>© 2026 Jessi Frances LLC</p>
+            <ul>
+              <li>
+                <Link to="/privacy">Privacy Policy</Link>
               </li>
-            ))}
-          </ul>
-          <p className="ce-foot__legal">© 2026 Jessi Frances</p>
+              <li>
+                <Link to="/terms">Terms of Use</Link>
+              </li>
+            </ul>
+          </div>
         </div>
       </footer>
     </main>

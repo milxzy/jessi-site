@@ -77,7 +77,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 24px var(--gutter) 64px;
+  padding: 24px var(--gutter) 24px;
 }
 .ce-title {
   margin: 0;
@@ -165,6 +165,10 @@
   font-size: 1rem;
   line-height: 1.5;
 }
+.ce-includes__legal {
+  display: block;
+  margin-top: 16px;
+}
 .ce-error {
   margin: 0;
   font-size: 1rem;
@@ -190,7 +194,7 @@
 /* the letter: typewritten on a sheet one tone lighter than the page */
 .ce-letter {
   grid-area: letter;
-  padding: clamp(96px, 12vw, 176px) var(--gutter) clamp(96px, 12vw, 176px);
+  padding: clamp(40px, 5vw, 72px) var(--gutter) clamp(96px, 12vw, 176px);
 }
 .ce-letter__title {
   margin: 0 0 40px;
@@ -306,6 +310,87 @@
 }
 .ce-foot__legal {
   justify-self: end;
+  text-align: right;
+}
+.ce-foot__legal p {
+  margin: 0;
+}
+.ce-foot__legal ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px 24px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ce-foot__legal a,
+.ce-includes a,
+.ce-legal a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.ce-foot__legal a {
+  display: inline-block;
+  padding: 8px 0;
+}
+.ce-foot__legal a:hover,
+.ce-includes a:hover,
+.ce-legal a:hover {
+  color: var(--oxblood);
+}
+.ce-foot__legal a:hover {
+  color: var(--caramel);
+}
+
+/* legal pages */
+.ce-legal__head {
+  padding: 44px var(--gutter) 0;
+}
+.ce-legal__body {
+  max-width: 44rem;
+  padding: clamp(56px, 8vw, 112px) var(--gutter) clamp(72px, 9vw, 128px);
+}
+.ce-legal__title {
+  margin: 0;
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+.ce-legal__body .ce-legal__date {
+  margin: 28px 0 40px;
+  color: var(--rust);
+}
+.ce-legal__body h2 {
+  margin: 48px 0 12px;
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 1.05;
+}
+.ce-legal__body p {
+  margin: 0 0 1em;
+  overflow-wrap: anywhere;
+}
+.ce-legal__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding: 40px var(--gutter);
+  background: var(--night);
+  color: var(--blush);
+}
+.ce-legal__foot a {
+  display: inline-block;
+  padding: 10px 0;
+  color: inherit;
+}
+.ce-legal__foot a:hover {
+  color: var(--caramel);
 }
 
 /* motion: one arrival on load, one rise as each part of the letter is reached. all of it stops under reduced motion. */
@@ -372,6 +457,22 @@
   }
 }
 
+@media (max-width: 900px) {
+  .ce-legal__head {
+    padding-top: 28px;
+  }
+  .ce-legal__body {
+    padding-top: 40px;
+  }
+  .ce-legal__body h2 {
+    margin-top: 36px;
+    font-size: 1.75rem;
+  }
+  .ce-legal__body .ce-legal__date {
+    margin-bottom: 28px;
+  }
+}
+
 /* phone and small tablet: the photograph leads, then the sheet slides up over it */
 @media (max-width: 900px) {
   .ce {
@@ -413,7 +514,7 @@
     grid-area: hero;
     min-height: 0;
     justify-content: flex-start;
-    padding: 28px var(--gutter) 56px;
+    padding: 28px var(--gutter) 24px;
   }
   .ce-title {
     font-size: clamp(3.75rem, 17.5vw, 6.5rem);
@@ -437,8 +538,23 @@
     grid-template-columns: 1fr;
     gap: 20px;
   }
+  .ce-foot__row {
+    justify-items: center;
+    text-align: center;
+  }
   .ce-foot__legal {
-    justify-self: start;
+    justify-self: center;
+    text-align: center;
+  }
+  .ce-foot__legal ul {
+    justify-content: center;
+  }
+  .ce-foot__social {
+    justify-content: center;
+  }
+  .ce-legal__foot {
+    justify-content: center;
+    text-align: center;
   }
   .ce-foot__social {
     gap: 32px;

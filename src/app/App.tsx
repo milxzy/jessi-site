@@ -11,6 +11,7 @@ const B = lazy(() => import('@/concepts/b'))
 const C = lazy(() => import('@/concepts/c'))
 const D = lazy(() => import('@/concepts/d'))
 const E = lazy(() => import('@/concepts/e'))
+const Legal = lazy(() => import('@/concepts/e/Legal'))
 
 export function App() {
   return (
@@ -25,6 +26,8 @@ export function App() {
             <Route path="/c/*" element={<><C /><ConceptSwitcher current="c" /></>} />
             <Route path="/d/*" element={<><D /><ConceptSwitcher current="d" /></>} />
             <Route path="/landing-page" element={<><E /><ConceptSwitcher current="landing-page" /></>} />
+            <Route path="/privacy" element={<Legal page="privacy" />} />
+            <Route path="/terms" element={<Legal page="terms" />} />
             <Route path="/e" element={<Navigate to="/landing-page" replace />} />
             <Route path="*" element={<ConceptPicker />} />
           </Routes>
