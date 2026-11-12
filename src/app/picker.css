@@ -110,8 +110,12 @@
   .picker-letter {
     font-size: 2.6rem;
   }
+  /* the landing page row has a word, not a letter: it can't fit the narrow letter column, and its name repeats it */
   .picker-letter--word {
-    font-size: 1.15rem;
+    display: none;
+  }
+  .picker-letter--word + .picker-text {
+    grid-column: 1 / -1;
   }
   .picker-thumb {
     grid-column: 1 / -1;
